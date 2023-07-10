@@ -1,0 +1,10 @@
+<configuration>
+  <appender name="DEV" class="ch.qos.logback.core.ConsoleAppender">
+    <layout>
+      <Pattern>%magenta(%d{HH:mm:ss.SSS}) %highlight(%-5level) --- [%20.20t] %yellow(%X{kubernetesObject}) %cyan(%-40.40c:) %m%n%ex</Pattern>
+    </layout>
+  </appender>
+  <root level="INFO">
+    <appender-ref ref="DEV"/>
+  </root>
+</configuration>

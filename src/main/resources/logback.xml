@@ -1,0 +1,27 @@
+<configuration>
+  <springProperty name="newRelicAppenderEnabled" source="logging.newRelic.appender.enabled"/>
+  <appender name="DEV" class="ch.qos.logback.core.ConsoleAppender">
+    <layout>
+      <Pattern>%magenta(%d{HH:mm:ss.SSS}) %highlight(%-5level) [%20.20t] --- %yellow(%X{kubernetesObject}) %cyan(%-40.40c:) %m%n%ex</Pattern>
+    </layout>
+  </appender>
+  <appender name="NR" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="com.newrelic.logging.logback.NewRelicEncoder">
+    </encoder>
+  </appender>
+  <appender name="NR_ASYNC" class="com.newrelic.logging.logback.NewRelicAsyncAppender">
+    <appender-ref ref="NR"/>
+  </appender>
+  <if condition='property("newRelicAppenderEnabled").equals("true")'>
+    <then>
+      <root level="INFO">
+        <appender-ref ref="NR_ASYNC"/>
+      </root>
+    </then>
+    <else>
+      <root level="INFO">
+        <appender-ref ref="DEV"/>
+      </root>
+    </else>
+  </if>
+</configuration>

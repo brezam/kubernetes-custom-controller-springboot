@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+logging:
+  newRelic:
+    appender:
+      enabled: ${NEW_RELIC_APPENDER_ENABLED:false}
+  level:
+    ROOT: ${LOG_ROOT_LEVEL:INFO}
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: kubernetes-custom-controller-springboot
+
+controllers:
+  eventhub:
+    resync-period-seconds: ${EVENTHUB_RESYNC_PERIOD:30s}
+    default-resource-group: ${EVENTHUB_DEFAULT_RESOURCE_GROUP:}
+
+azure:
+  schema-registry-access:
+    client-id: ${SCHEMA_REGISTRY_SPN_CLIENT_ID:}
+  credentials:
+    subscription-id: ${AZURE_SUBSCRIPTION_ID:}
+    client-id: ${AZURE_CLIENT_ID:}
+    client-secret: ${AZURE_CLIENT_SECRET:}
+    tenant-id: ${AZURE_TENANT_ID:}

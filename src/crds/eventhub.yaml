@@ -1,0 +1,47 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: eventhubs.eventhubcontroller.bruno.zamariola.org
+spec:
+  group: eventhubcontroller.bruno.zamariola.org
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              eventHubInstanceName:
+                type: string
+                minLength: 1
+              eventHubResourceGroup:
+                type: string
+                minLength: 1
+              authorizationName:
+                type: string
+                minLength: 1
+              authorizationClaims:
+                type: array
+                items:
+                  type: string
+                  enum: [ "manage", "send", "listen" ]
+            required:
+            - eventHubInstanceName
+            - authorizationName
+            - authorizationClaims
+          status:
+            type: object
+            properties:
+              current:
+                type: string
+                default: "unknown"
+    subresources:
+      status: {}
+  names:
+    kind: Eventhub
+    plural: eventhubs
+  scope: Namespaced

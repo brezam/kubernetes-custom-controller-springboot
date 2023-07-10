@@ -1,0 +1,11 @@
+# MacOS Files
+*.DS_Store
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Build
+target/

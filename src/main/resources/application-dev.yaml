@@ -1,0 +1,4 @@
+controllers:
+  eventhub:
+    host-alias-mapping:
+      sandbox-test: bees-sandbox-eastus2-identity-integration
